@@ -1,4 +1,3 @@
-let skins = require('./configs/skins.json').Skins;
 let spawnPoints = require('./configs/spawn_points.json').SpawnPoints
 
 
@@ -36,7 +35,7 @@ mp.events.add('playerJoin', (player) => {
 
     player.spawn(spawnPoints[Math.floor(Math.random() * spawnPoints.length)]);
 
-    player.model = skins[Math.floor(Math.random() * skins.length)];
+    player.model = -67533719
     player.health = 100;
     player.armour = 100;
 });
