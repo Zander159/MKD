@@ -9,7 +9,8 @@ mp.events.add("playerCommand", (player, command) => {
 
 			switch (parseInt(args[0])) {
 				case 1:
-					player.call(`camaraOn`, [position, rotation, fov]);
+					player.call('camaraOn', true);
+					console.log('camaraOn')
 					break;
 
 				default:
