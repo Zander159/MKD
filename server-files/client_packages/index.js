@@ -1,4 +1,5 @@
 require('./noclip/index.js');
+require('./events/events.js')
 
 setInterval(() => {
 	mp.game.invoke('0x9E4CFFF989258472');
