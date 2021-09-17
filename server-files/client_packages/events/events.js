@@ -1,25 +1,33 @@
-let camaraOn = 0 
+let camaraOn = 0
 let cam
-mp.events.add("toggleCamara",(toggle) => {
+let camPos
+
+mp.events.add("toggleCamara", (toggle) => {
     camaraOn = toggle
-    if(toggle) {
-        var camPos = new mp.Vector3(973.7493896484375,86.74250030517578,85.07453155517578)
-        var plaPos = mp.players.local.position
-    
-        cam = mp.cameras.new('DEFAULT_SCRIPTED_FLY_CAMERA', camPos, mp.players.local.getRotation(5), 45)
+    plaRot = mp.players.local.getRotation(5)
+    plaPos = mp.players.local.position
+    mp.game.ui.displayHud(!toggle)
+    mp.game.ui.displayRadar(!toggle)
+
+    if (toggle != 0) mp.game.graphics.setTimecycleModifier('phone_cam')
+
+    if (toggle == 1) {
+        camPos = new mp.Vector3(973.7493896484375, 86.74250030517578, 85.07453155517578)
+        cam = mp.cameras.new('Casino', camPos, plaRot, 45)
         cam.pointAtCoord(plaPos.x, plaPos.y, plaPos.z)
-        mp.game.ui.displayRadar(false)
-        mp.game.ui.displayHud(false)
-        
-    }else {
+
+    } else if (toggle == 2) {
+        camPos = new mp.Vector3(237.06117248535156, 227.80938720703125, 113.44822692871094)
+        cam = mp.cameras.new('Bank', camPos, plaRot, 35)
+        cam.pointAtCoord(plaPos.x, plaPos.y, plaPos.z)
+
+    } else {
         mp.game.cam.renderScriptCams(false, false, 0, false, false)
         mp.game.graphics.setTimecycleModifier("default")
-        mp.game.ui.displayHud(true)
-        mp.game.ui.displayRadar(true);
     }
 })
 
-mp.events.add('render', () => { 
+mp.events.add('render', () => {
     if (camaraOn) {
         mp.game.cam.renderScriptCams(true, false, 0, true, false)
     }
