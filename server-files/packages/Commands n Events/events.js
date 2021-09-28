@@ -39,4 +39,3 @@ mp.events.add('playerJoin', (player) => {
     player.health = 100
     player.armour = 100
 });
-
