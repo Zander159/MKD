@@ -5,27 +5,32 @@ let camPos
 
 mp.events.add("toggleCamara", (toggle) => {
     camaraOn = toggle
-    camRot1 = new mp.Vector3(-36.56012725830078, 2.657306765740941, -84.67811584472656)
-    camRot2 = new mp.Vector3(-25.405691146850586, 0, -174.14405822753906)
+    camRot1 = new mp.Vector3(-36.5, 2.5, -84.5)
+    camRot2 = new mp.Vector3(-17, -4, -71)
+    camRot3 = new mp.Vector3(-21, 9, 38)
     mp.game.ui.displayHud(!toggle)
     mp.game.ui.displayRadar(!toggle)
 
-    if (toggle != 0) {clon = mp.peds.new(mp.game.joaat('ig_mp_agent14'),new mp.Vector3(1272.230224609375, -1712.0103759765625, 54.771488189697266),100.0,0);} else { clon.destroy() }
+
+    if (toggle != 0) {
+        clon = mp.peds.new(mp.game.joaat('ig_mp_agent14'), new mp.Vector3(1272, -1712, 54), 100.0, 0);
+    } else { clon.destroy() }
 
     if (toggle != 0) { mp.players.local.freezePosition(true) } else { mp.players.local.freezePosition(false) }
 
     if (toggle != 0) mp.game.graphics.setTimecycleModifier('phone_cam')
 
     if (toggle == 1) {
-        camPos = new mp.Vector3(973.7493896484375, 86.74250030517578, 85.07453155517578)
+        camPos = new mp.Vector3(974, 87, 85)
         cam = mp.cameras.new('Casino', camPos, camRot1, 45)
-        mp.game.cam.clampGameplayCamPitch(0.0, 90.0)
-
     } else if (toggle == 2) {
-        camPos = new mp.Vector3(237.06117248535156, 227.80938720703125, 113.44822692871094)
-        cam = mp.cameras.new('Bank', camPos, camRot2, 35)
-        mp.game.cam.clampGameplayCamYaw(-90, 90)
-    } else {
+        camPos = new mp.Vector3(241.6, 214.7, 108.5)
+        cam = mp.cameras.new('Bank1', camPos, camRot2, 50)
+    } else if (toggle == 3) {
+        camPos = new mp.Vector3(255, 205, 108)
+        cam = mp.cameras.new('Bank2', camPos, camRot3, 50)
+    }
+    else {
         mp.game.cam.renderScriptCams(false, false, 0, false, false)
         mp.game.graphics.setTimecycleModifier("default")
     }
@@ -55,11 +60,19 @@ mp.events.add('render', () => {
 
         currentRot = new mp.Vector3(currentRot.x - y, 0, currentRot.z - x);
 
-        cam.setRot(currentRot.x, currentRot.y, currentRot.z, 2);
+        if (camaraOn == 1) {
+            if (currentRot.x + y * -10 * (0.3) <= camRot1.x + 10 && currentRot.x + y * -10 * (0.3) >= camRot1.x - 15) { newX = currentRot.x }
+            if (currentRot.z + x * -10 * (0.3) <= camRot1.z + 110 && currentRot.z + x * -10 * (0.3) >= camRot1.z - 50) { newZ = currentRot.z }
+        } else if (camaraOn == 2) {
+            if (currentRot.x <= camRot2.x + 10 && currentRot.x + y * -10 * (0.3) >= camRot2.x - 15) { newX = currentRot.x }
+            if (currentRot.z + x * -10 * (0.3) <= camRot2.z + 45 && currentRot.z + x * -10 * (0.3) >= camRot2.z - 70) { newZ = currentRot.z }
+        } else if (camaraOn == 3) {
+            if (currentRot.x <= camRot3.x + 10 && currentRot.x + y * -10 * (0.3) >= camRot3.x - 15) { newX = currentRot.x }
+            if (currentRot.z + x * -10 * (0.3) <= camRot3.z + 30 && currentRot.z + x * -10 * (0.3) >= camRot3.z - 70) { newZ = currentRot.z }
+        }
+        cam.setRot(newX, currentRot.y, newZ, 2)
 
-        // let q = mp.keys.isDown(81);
 
-        // if(q) mp.console.logInfo("Rot: " + JSON.stringify(cam.getRot(2)))
 
         if (zoomIn > 0) {
             let currentFov = cam.getFov()
@@ -75,4 +88,9 @@ mp.events.add('render', () => {
             cam.setFov(currentFov)
         }
     }
-});
+
+
+    let trigger = mp.keys.isDown(88);
+
+    if (trigger) mp.console.logInfo("Rot: " + JSON.stringify(cam.getRot(2)))
+})

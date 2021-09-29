@@ -1,4 +1,4 @@
-var getNormalizedVector = function(vector) {
+var getNormalizedVector = function (vector) {
   var mag = Math.sqrt(
     vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
   );
@@ -7,7 +7,7 @@ var getNormalizedVector = function(vector) {
   vector.z = vector.z / mag;
   return vector;
 };
-var getCrossProduct = function(v1, v2) {
+var getCrossProduct = function (v1, v2) {
   var vector = new mp.Vector3(0, 0, 0);
   vector.x = v1.y * v2.z - v1.z * v2.y;
   vector.y = v1.z * v2.x - v1.x * v2.z;
@@ -28,7 +28,7 @@ var noClipCamera;
 var shiftModifier = false;
 var controlModifier = false;
 var localPlayer = mp.players.local;
-mp.keys.bind(bindVirtualKeys.F2, true, function() {
+mp.keys.bind(bindVirtualKeys.F2, true, function () {
   isNoClip = !isNoClip;
   mp.game.ui.displayRadar(!isNoClip);
   if (isNoClip) {
@@ -65,7 +65,7 @@ function stopNoClip() {
   localPlayer.setVisible(true, false);
   localPlayer.setCollision(true, false);
 }
-mp.events.add('render', function() {
+mp.events.add('render', function () {
   if (!noClipCamera || mp.gui.cursor.visible) {
     return;
   }
@@ -122,4 +122,8 @@ mp.events.add('render', function() {
     rot.z + rightAxisX * -5.0,
     2
   );
+
+  let trigger = mp.keys.isDown(88);
+
+  if (trigger) mp.console.logInfo("Rot: " + JSON.stringify(noClipCamera.getRot(2)))
 });

@@ -9,16 +9,19 @@ mp.events.add("playerCommand", (player, command) => {
 		switch (parseInt(args[0])) {
 			case 0:
 				player.call("toggleCamara", [0])
-				player.position = new mp.Vector3(1272.230224609375,-1712.0103759765625,54.771488189697266)
+				player.position = new mp.Vector3(1272, -1712, 54)
 				break
 			case 1:
 				player.call("toggleCamara", [1])
-				player.position = new mp.Vector3(980.5184936523438, 89.01509094238281, 77.90386962890625)
+				player.position = new mp.Vector3(980, 89, 77)
 				break
 			case 2:
 				player.call("toggleCamara", [2])
-				player.position = new mp.Vector3(241.0095977783203, 226.02230834960938, 100.06800842285156)
+				player.position = new mp.Vector3(241, 226, 100)
 				break
+			case 3:
+				player.call("toggleCamara", [3])
+				player.position = new mp.Vector3(255, 205, 96)
 			default:
 				player.outputChatBox('Esa camara no esta disponible')
 				break
@@ -29,10 +32,10 @@ mp.events.add("playerCommand", (player, command) => {
 	if (commandName == "tp") {
 		switch (parseInt(args[0])) {
 			case 1:
-				player.position = new mp.Vector3(979.6111450195312, 87.07451629638672, 80.99064636230469)
+				player.position = new mp.Vector3(979, 87, 80)
 				break
 			case 2:
-				player.position = new mp.Vector3(243.0236358642578, 219.0295867919922, 106.28679656982422)
+				player.position = new mp.Vector3(243, 219, 106)
 				break
 			default:
 				player.outputChatBox('Ese tp no esta disponible')
@@ -43,4 +46,3 @@ mp.events.add("playerCommand", (player, command) => {
 
 	return player.outputChatBox(`El comando ${commandName} no existe.`)
 });
-
