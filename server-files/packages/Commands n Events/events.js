@@ -6,7 +6,7 @@ function Random(min, max) {
     return Number
 }
 
-
+// CHAT
 mp.events.add({
     "playerJoin": player => {
         player.data.ChatColor = [Random(0, 255), Random(0, 255), Random(0, 255)]
@@ -24,7 +24,7 @@ mp.events.add({
     }
 });
 
-
+// PLAYER SPAWN
 mp.events.add('playerJoin', (player) => {
     player.customData = {}
 

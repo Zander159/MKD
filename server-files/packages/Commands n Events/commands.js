@@ -5,6 +5,7 @@ mp.events.add("playerCommand", (player, command) => {
 
 	if (commandName == "coords") console.log(player.position)
 
+	//COMMAND WHO TRIGGER THE CAMERAS (CAN BE TRIGGER IN OTHER WAYS)
 	if (commandName == "c") {
 		switch (parseInt(args[0])) {
 			case 0:
@@ -29,6 +30,7 @@ mp.events.add("playerCommand", (player, command) => {
 		return true
 	}
 
+	//TP COMMAND
 	if (commandName == "tp") {
 		switch (parseInt(args[0])) {
 			case 1:

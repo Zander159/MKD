@@ -123,6 +123,8 @@ mp.events.add('render', function () {
     2
   );
 
+
+  //PRESS X TO GET ROT (USED WHEN THE CAMERA IS NOT CREATED)
   let trigger = mp.keys.isDown(88);
 
   if (trigger) mp.console.logInfo("Rot: " + JSON.stringify(noClipCamera.getRot(2)))
