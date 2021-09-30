@@ -10,6 +10,6 @@ y un sistema de movimiento limitado para brindarle al usuario una experiencia ma
 
 ***Comandos***
 
-/c [1,2,3]: ir a las diferentes camaras de seguridad. (Facilmente aplicable a distintas formas para cambiar entre camara y camara)
+/c [0,1,2,3]: ir a las diferentes camaras de seguridad. [/c 0 para volver a la posicion inicial] (Facilmente aplicable a distintas formas para cambiar entre camara y camara)
 
 /tp [1,2]: Tpea al usuario a las posiciones donde las camaras de seguridad se encuentran.  (utilizado para el desarrollo)
